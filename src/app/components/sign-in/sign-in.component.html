@@ -1,7 +1,7 @@
 
 <section id="sigIn">
     <div class="container">
-        <form  [formGroup]="logInForm" (ngSubmit)="logInForm.valid && logIn()">
+        <form  [formGroup]="logInForm" (ngSubmit)=" login()">
             <div class="form w-50 m-auto">
                 <input formControlName="email"  type="email" class="form-control my-3"  placeholder="Enter your Email"
                 [class.is-valid]="logInForm.get('email')?.status=='VALID'"
@@ -15,7 +15,7 @@
         </div>
                  <input type="password" formControlName="password" placeholder="Enter Your Password" class="form-control my-3">
               
-               <button  type="submit" class="btn btn-info w-100">sign in</button>
+               <button   class="btn btn-info w-100">sign in</button>
         
             </div>
         </form>

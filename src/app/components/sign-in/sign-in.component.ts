@@ -21,28 +21,18 @@ export class SignInComponent {
   }
   logInForm=new FormGroup({
    email:new FormControl('',[Validators.email,Validators.required]),
-   password:new FormControl('',[Validators.pattern('^[A-Z]{3}'),Validators.required])
+   password:new FormControl('',Validators.required)
   }) 
-  logIn(){
+  login(){
     if(this.logInForm.valid){
-      console.log("valid signin form")
-      console.log(this.logInForm.value)
       this._AuthService.signIn(this.logInForm.value).subscribe((responce)=>{
-        console.log(responce)
        if(responce.message == 'success'){
-        console.log("hello in profile")
           this._Router.navigate(['/profile'])
-          console.log("dakhal")
           localStorage.setItem('token',responce.token)
-          console.log("token",responce.token)
-       }
-       else{
-        console.log(this.logInForm)
-
        }
       })
     }
-  
+   
   }
  ngOnInit(){
   $('#sigIn').particleground()

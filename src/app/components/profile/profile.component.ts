@@ -41,6 +41,7 @@ EditNote = new FormGroup({
 
 })
 getAllNotes(){
+  console.log('get notes')
   var data={
     token:this.TOKEN,
     userID:this.decoded._id
@@ -95,6 +96,7 @@ deleteNote(){
 this._NotesService.deleteNote(data).subscribe((res)=>{
 if(res.message == 'deleted'){
   $('#DeleteNote').modal('hide')
+  console.log(res)
   this.getAllNotes()
 }
   })
