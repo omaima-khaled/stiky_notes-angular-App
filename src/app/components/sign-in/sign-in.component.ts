@@ -30,6 +30,9 @@ export class SignInComponent {
           this._Router.navigate(['/profile'])
           localStorage.setItem('token',responce.token)
        }
+       else{
+        console.log('invalid password or email')
+       }
       })
     }
    

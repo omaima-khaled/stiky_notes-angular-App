@@ -52,13 +52,19 @@ getAllNotes(){
     if(res.message=='success'){
       this.isLoad=true
       this.AllNotes=res.Notes
+      console.log(this.AllNotes)
       
+    }
+    else if(res.message=='no notes found'){
+      this.isLoad=true
+      this.AllNotes=res.Notes
     }
      else{
 
        localStorage.clear()
-    //   this._Router.navigate(['/signin'])
+      this._Router.navigate(['/signin'])
     }
+   
    
   })
 }
