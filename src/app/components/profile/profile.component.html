@@ -1,0 +1,139 @@
+<section id="profile">
+  
+    <div class="container pt-5">
+     <!--<div *ngIf="!isLoad" class="row">
+        <div class="col-md-12 text-center">
+          <i class="fas fa-spinner fa-2x fa-spin text-white"></i>
+        </div>
+      </div>-->
+
+
+        <div   class="row">
+            <div class="col-md-12">
+                <button class="btn btn-info float-end "  data-bs-toggle="modal" data-bs-target="#AddNote">Add Note</button>
+
+            </div>
+            <div *ngFor="let note of AllNotes" class="col-md-3 my-4">
+                <div class="note p-4 text-center">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <i class="fas fa-ellipsis-v float-end p-2" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false" ></i>
+  <ul class="dropdown-menu p-2" aria-labelledby="dropdownMenuButton1">
+    <li>
+        <div class="d-flex justify-content-between">
+            <a class="dropdown-item " data-bs-toggle="modal" (click)="getId(note._id);setValue()" data-bs-target="#EditNote">Edit</a>
+            <i class="far fa-edit p-2 text-info"></i>
+        </div>
+    </li>
+    <li>
+        <div class="d-flex justify-content-between">
+            <a class="dropdown-item" data-bs-toggle="modal" (click)="getId(note._id);" data-bs-target="#DeleteNote">Delete</a>
+            <i class="fas fa-trash p-2 text-danger"></i>
+        </div>
+   </li>
+    
+  </ul>
+
+                        </div>
+                    </div>
+                   <h2>{{note.title}}</h2>
+                   <p>{{note.desc}}</p>
+                   
+                </div>
+            </div>
+        </div>
+       
+    </div>
+</section>
+
+<!--modals-->
+ <!-- add  Modal -->
+  <div class="modal fade" id="AddNote" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <form  [formGroup]="AddNote" (ngSubmit)="addData()">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Add Note</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <input formControlName="title" type="text" placeholder="Title" class="form-control">
+                    </div>
+                    <div class="col-md-12">
+                      <textarea formControlName="desc"  type="text" placeholder=" Add Description"  class="mt-2 form-control"  rows="10"></textarea>
+                  </div>
+                </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+              <button type="submit" class="btn btn-info">Add note</button>
+            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancel</button>
+            
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+  <!--modal   edit-->
+  <div class="modal fade" id="EditNote" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+     <form [formGroup]="EditNote" (ngSubmit)="editData()" >
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Edit Note</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="container">
+              <div class="row">
+                  <div class="col-md-12">
+                      <input formControlName="title"   type="text" placeholder="Title" class="form-control">
+                  </div>
+                  <div class="col-md-12">
+                    <textarea formControlName="desc"  type="text" placeholder="Description"  class="mt-2 form-control"  rows="10"></textarea>
+                </div>
+              </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+            <button type="submit" class="btn btn-info">
+              <span *ngIf="!isClicked">save</span> 
+              <span *ngIf="isClicked">Waiting...</span>
+            </button>
+          <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancel</button>
+          
+        </div>
+      </div>
+     </form>
+    </div>
+  </div>
+  <!--modat dellete-->
+  <div class="modal fade" id="DeleteNote" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Are you sure?</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="container">
+              <div class="row">
+                  <div class="col-md-12 text-center text-info">
+                      <p>"Do you really want to delete ?"<br>
+                        "process cannot be undone"</p>
+                 </div>
+                  
+              </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+            <button (click)="deleteNote()" class="btn btn-info">Delete</button>
+          <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancel</button>
+          
+        </div>
+      </div>
+    </div>
+  </div>
