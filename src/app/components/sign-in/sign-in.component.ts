@@ -27,7 +27,7 @@ export class SignInComponent {
     if(this.logInForm.valid){
       this._AuthService.signIn(this.logInForm.value).subscribe((responce)=>{
        if(responce.message == 'success'){
-          this._Router.navigate(['/profile'])
+          this._Router.navigate(['profile'])
           localStorage.setItem('token',responce.token)
        }
        else{
